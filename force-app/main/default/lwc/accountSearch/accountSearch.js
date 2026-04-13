@@ -1,5 +1,5 @@
 import { LightningElement,wire } from 'lwc';
-import queryAccountsByEmployeeNumber from '@salesforce/apex/AccountListControllerLwc.queryAccountsByEmployeeNumber';
+// import queryAccountsByEmployeeNumber from '@salesforce/apex/AccountListControllerLwc.queryAccountsByEmployeeNumber';
 export default class AccountSearch extends LightningElement {
     numberOfEmployees = null;
     handleChange(event) {
@@ -9,6 +9,6 @@ export default class AccountSearch extends LightningElement {
         this.numberOfEmployees = null;
     }
 
-    @wire(queryAccountsByEmployeeNumber, { numberOfEmployees: '$numberOfEmployees' })
-accounts;
+  /*  @wire(queryAccountsByEmployeeNumber, { numberOfEmployees: '$numberOfEmployees' })
+accounts; */
 }

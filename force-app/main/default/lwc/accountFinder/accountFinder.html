@@ -1,0 +1,62 @@
+<template>
+  <lightning-card title="Account Finder">
+    <div class="slds-p-horizontal_medium slds-p-vertical_small">
+      <lightning-input
+        type="number"
+        label="Annual Revenue"
+        value={annualRevenue}
+        formatter="currency"
+        step="1000"
+        min="0"
+        message-when-range-underflow="Value cannot be negative"
+        onchange={handleChange}
+      >
+      </lightning-input>
+
+      <p class="slds-m-top_small" aria-live="polite">
+        Current Status:
+        <lightning-formatted-number
+          value={annualRevenue}
+          format-style="currency"
+        ></lightning-formatted-number>
+      </p>
+
+      <div class="slds-m-top_small">
+        <lightning-button
+          label="Reset"
+          variant="neutral"
+          onclick={reset}
+        ></lightning-button>
+      </div>
+
+      <template if:true={accounts}>
+        <template if:true={accounts.data}>
+          <template if:true={accounts.data.length}>
+            <ul class="slds-m-top_medium">
+              <template for:each={accounts.data} for:item="account">
+                <li key={account.Id}>
+                  <div>{account.Name}</div>
+                  <div>{account.revenue}</div>
+                  <lightning-formatted-number
+                    value={account.AnnualRevenue}
+                    format-style="currency"
+                  ></lightning-formatted-number>
+                </li>
+              </template>
+            </ul>
+          </template>
+          <template if:false={accounts.data.length}>
+            <p class="slds-text-color_weak slds-m-top_medium">
+              No accounts found for the given criteria.
+            </p>
+          </template>
+        </template>
+        <template if:true={accounts.error}>
+          <p class="slds-text-color_error slds-m-top_medium">
+            An error occurred while loading accounts.
+          </p>
+        </template>
+      </template>
+    </div>
+  </lightning-card>
+</template>
